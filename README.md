@@ -1558,3 +1558,102 @@ Establece conexión USB con el ESP32.
 def read_imu_data(ser):
     if ser is None:
         return None
+```
+
+---
+
+# Configuración Esclavo-Maestro: ESP32 - Arduino
+
+## Descripción del sistema
+
+Este sistema implementa una comunicación **bidireccional** entre ESP32 y Arduino usando **UART (Serial)**:
+
+- **ESP32 → Arduino**: Envía comandos del control PS4
+- **Arduino → ESP32**: Envía datos del IMU
+- **ESP32 → Python**: Reenvía datos del IMU para visualización
+
+Es una arquitectura en **triángulo** donde el ESP32 actúa como puente entre el PS4, el Arduino y la computadora.
+
+---
+
+## Configuración del ESP32 (Maestro/Esclavo)
+
+### Código de configuración:
+```cpp
+#define RXD2 16
+#define TXD2 17
+
+void setup() {
+  Serial.begin(115200);                         // USB a Python
+  Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);  // UART2 con Arduino
+  delay(50);
+  PS4.begin();
+}
+```
+
+### Explicación detallada:
+
+#### 1. Definición de pines UART2:
+```cpp
+#define RXD2 16  // Pin de recepción
+#define TXD2 17  // Pin de transmisión
+```
+
+- **RXD2 (pin 16)**: Recibe datos DEL Arduino
+- **TXD2 (pin 17)**: Envía datos AL Arduino
+- El ESP32 tiene **3 puertos seriales**:
+  - Serial (USB): Comunicación con la computadora
+  - Serial1: Disponible pero no usado aquí
+  - **Serial2**: Comunicación con el Arduino
+
+#### 2. Inicialización del puerto USB:
+```cpp
+Serial.begin(115200);
+```
+
+- **Serial**: Puerto USB del ESP32
+- **115200 baudios**: Velocidad rápida para enviar datos a Python
+- **Dirección**: ESP32 → Computadora (solo transmite, no recibe)
+
+#### 3. Inicialización del UART2:
+```cpp
+Serial2.begin(9600, SERIAL_8N1, RXD2, TXD2);
+```
+
+Desglose de parámetros:
+
+- **9600**: Velocidad en baudios (debe coincidir con Arduino)
+- **SERIAL_8N1**: Configuración de bits
+  - **8**: 8 bits de datos
+  - **N**: Sin paridad (No parity)
+  - **1**: 1 bit de parada
+- **RXD2, TXD2**: Pines físicos a usar (16 y 17)
+
+**Nota importante**: El ESP32 permite configurar pines custom para UART, el Arduino NO.
+
+---
+
+## Configuración del Arduino (Esclavo)
+
+### Código de configuración:
+```cpp
+void setup() {
+    Serial.begin(9600);  // Puerto hardware (RX=0, TX=1)
+    
+    // ... configuración de motores, servos, IMU ...
+}
+```
+
+### Explicación detallada:
+
+#### 1. Inicialización del puerto serial:
+```cpp
+Serial.begin(9600);
+```
+
+- **Serial**: Puerto hardware del Arduino (ÚNICO puerto serial nativo)
+- **Pines fijos**:
+  - **Pin 0 (RX)**: Recibe datos DEL ESP32
+  - **Pin 1 (TX)**: Envía datos AL ESP32
+- **9600 baudios**: Velocidad estándar (debe coincidir con ESP32)
+- **No se pueden cambiar los pines**: El Arduino UNO solo tiene estos dos pines para serial hardware
