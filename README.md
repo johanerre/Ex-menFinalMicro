@@ -1,4 +1,4 @@
-# Configuración Esclavo-Triángulo: ESP32 ↔ Arduino
+# Configuración Esclavo-Maestro: ESP32 ↔ Arduino
 
 ## Descripción del sistema
 
@@ -8,7 +8,6 @@ Este sistema implementa una comunicación **bidireccional** entre ESP32 y Arduin
 - **Arduino → ESP32**: Envía datos del IMU
 - **ESP32 → Python**: Reenvía datos del IMU para visualización
 
-Es una arquitectura en **triángulo** donde el ESP32 actúa como puente entre el PS4, el Arduino y la computadora.
 
 ---
 
