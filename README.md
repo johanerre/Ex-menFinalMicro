@@ -159,16 +159,10 @@ Serial.println(Angle[1], 2);    // Envía Roll con 2 decimales
 - **Angle[1]**: Roll (inclinación lateral) - Actualizado cada 100ms
 
 **Características:**
-- ✅ Precisión del giroscopio (suave, sin ruido)
-- ✅ Estabilidad del acelerómetro (sin desviación)
-- ✅ Actualización 10 veces por segundo
-- ✅ No bloquea otras tareas del robot
-
-**Aplicaciones:**
-- Detectar inclinación del robot
-- Control de estabilidad
-- Detectar caídas
-- Saber si sube/baja rampas
+- Precisión del giroscopio (suave, sin ruido)
+- Estabilidad del acelerómetro (sin desviación)
+- Actualización 10 veces por segundo
+- No bloquea otras tareas del robot
 
 ---
 
@@ -878,11 +872,11 @@ cv2.destroyAllWindows()
 - Aplica rotación 2D para el roll
 
 ### Salida visual:
-- ✅ Horizonte artificial que responde a inclinación
-- ✅ Símbolo de avión fijo en el centro
-- ✅ Fecha y hora
-- ✅ Valores de Roll y Pitch
-- ✅ FPS en tiempo real
+- Horizonte artificial que responde a inclinación
+- Símbolo de avión fijo en el centro
+- Fecha y hora
+- Valores de Roll y Pitch
+- FPS en tiempo real
 
 ### Controles:
 - Presiona **'q'** para salir
