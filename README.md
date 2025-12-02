@@ -877,8 +877,4 @@ cv2.destroyAllWindows()
 - Fecha y hora
 - Valores de Roll y Pitch
 - FPS en tiempo real
-
-### Controles:
-- Presiona **'q'** para salir
-
 ---
