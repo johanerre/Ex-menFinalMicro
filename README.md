@@ -844,6 +844,7 @@ cv2.destroyAllWindows()
 
 ---
 
+![Interfaz](https://github.com/johanerre/Ex-menFinalMicro/blob/main/IMÁGENES/Captura%20de%20pantalla%202025-12-01%20225520.png)
 
 ---
 
@@ -947,5 +948,11 @@ Velocidad: 10 Hz (según lleguen del Arduino)
 ### 4. Modularidad:
 - Cada dispositivo se programa independientemente
 - Fácil debugging por secciones
+
+---
+
+# Montaje:
+
+![Montaje](https://github.com/johanerre/Ex-menFinalMicro/blob/main/IMÁGENES/Captura%20de%20pantalla%202025-12-02%20214107.png)
 
 ---
